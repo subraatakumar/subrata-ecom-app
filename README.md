@@ -124,6 +124,18 @@ const PrivateRoute = ({ children }) => {
 5. Realtime Updates
    The posts feed on the dashboard listens to changes in Firebase Realtime Database and updates in real-time, displaying posts as soon as they're created.
 
+## Design Patterns / Best Practices used
+
+```js
+{loading ? 'Posting...' : 'Create Post'}
+```
+
+- This code snippet utilizes conditional rendering, a best practice in React for providing dynamic UI feedback based on state. By employing a ternary operator, it clearly distinguishes between loading and idle states, enhancing user experience. This approach aligns with the separation of concerns principle, allowing components to manage their own state effectively. Additionally, it demonstrates the composition pattern by integrating logic directly into JSX. Overall, it encourages clear, maintainable code while keeping the UI responsive.
+
+
+
+
+
 ## 🚀 Future Enhancements
 
 - Like & Comment System: Allow users to interact with posts by liking and commenting.
