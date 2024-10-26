@@ -3,6 +3,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { Box, Button, FormControl, FormLabel, Heading, Input, Text, VStack } from '@chakra-ui/react';
 
 const SignIn = () => {
     const [email, setEmail] = useState('');
@@ -34,22 +35,40 @@ const SignIn = () => {
     }, [error])
 
     return (
-        <div className="flex justify-center items-center h-screen">
-            <div className="bg-gray-100 p-10 rounded-lg">
-                <h2 className="text-2xl mb-4">Sign In</h2>
+        <Box display="flex" alignItems="center" justifyContent="center" height="100vh">
+            <Box bg="gray.100" p={10} borderRadius="lg">
+                <Heading as="h2" size="lg" mb={4}>Sign In</Heading>
                 <form onSubmit={handleSignIn}>
-                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" className="p-2 border mb-4 w-full" required />
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" className="p-2 border mb-4 w-full" required />
-                    <button className="bg-blue-500 text-white p-2 w-full">Sign In</button>
+                    <VStack spacing={4} align="stretch">
+                        <FormControl isRequired>
+                            <FormLabel>Email</FormLabel>
+                            <Input
+                                type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                placeholder="Email"
+                            />
+                        </FormControl>
+                        <FormControl isRequired>
+                            <FormLabel>Password</FormLabel>
+                            <Input
+                                type="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                placeholder="Password"
+                            />
+                        </FormControl>
+                        <Button type="submit" colorScheme="blue" width="full">
+                            Sign In
+                        </Button>
+                    </VStack>
                 </form>
-                <p className="mt-4">
-                    Don't have an account? <Link to="/signup" className="text-blue-600">Sign Up</Link>
-                </p>
-                <p className="mt-4 text-red-600">
-                    {error}
-                </p>
-            </div>
-        </div>
+                <Text mt={4}>
+                    Don't have an account? <Link to="/signup" style={{ color: 'blue.600' }}>Sign Up</Link>
+                </Text>
+                {error && <Text mt={4} color="red.600">{error}</Text>}
+            </Box>
+        </Box>
     );
 };
 
